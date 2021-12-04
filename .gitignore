@@ -1,0 +1,7 @@
+atm.o
+atm
+atm-main.o
+bank
+bank.o
+bank-main.o
+net.o
