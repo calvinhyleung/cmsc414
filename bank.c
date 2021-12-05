@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include<stdio.h>
 
 Bank* bank_create(char *auth_file, char *ip, unsigned short port)
 {
@@ -10,7 +11,7 @@ Bank* bank_create(char *auth_file, char *ip, unsigned short port)
 	Bank *bank = (Bank*) calloc(1, sizeof(Bank));
     
 	// if not auth_file exists, create auth_file
-	//bank->auth_file = auth_file
+	bank->auth_file = auth_file;
         
 	if(bank == NULL) {
 		perror("Could not allocate Bank");
@@ -104,6 +105,21 @@ ssize_t bank_recv(Bank *bank, char *data, size_t max_data_len) {
 
 void bank_process_remote_command(Bank *bank, char *command, size_t len) {
 	// TODO: Implement the bank side of the ATM-bank protocol
+  	char *account = strtok(command, " ");
+	char *auth = strtok(NULL, " ");
+	char *ip_addr = strtok(NULL, " ");
+	char *port = strtok(NULL, " ");
+	char *card = strtok(NULL, " ");
+	char *mode = strtok(NULL, " ");
+	char *amount = strtok(NULL, " ");
+	
+	printf("Account: %s\n", account);
+	printf("Auth file: %s\n", auth);
+	printf("IP: %s\n", ip_addr);
+	printf("Port: %d\n", atoi(port));
+	printf("Card: %s\n", card);
+	printf("Mode: %s\n", mode);
+	printf("Amount: %f\n", atof(amount));
 }
 
 //Add more functions as required
